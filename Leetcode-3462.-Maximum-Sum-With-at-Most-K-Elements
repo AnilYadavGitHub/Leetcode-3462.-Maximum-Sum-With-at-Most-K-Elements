@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    long long maxSum(vector<vector<int>>& grid, vector<int>& limits, int k) {
+        vector<int> ans;
+
+        for(int i = 0; i < grid.size(); i++) {
+            sort(grid[i].rbegin(), grid[i].rend());
+        }
+
+        for(int i = 0; i < grid.size(); i++) {
+            for(int j = 0; j < limits[i]; j++) {
+                ans.push_back(grid[i][j]);
+            }
+        }
+
+        sort(ans.rbegin(), ans.rend());
+
+        long long sum = 0;
+        for(int i = 0; i < k; i++) {
+            sum += ans[i];
+        }
+
+        return sum;
+    }
+};
+
+int main() {
+    vector<vector<int>> grid = {{1, 3, 5}, {2, 4, 6}, {7, 8, 9}};
+    vector<int> limits = {2, 2, 1}; // Pick top 2 from first row, top 2 from second row, and top 1 from third row
+    int k = 3; // Select top 3 elements overall
+
+    Solution sol;
+    cout << "Maximum Sum: " << sol.maxSum(grid, limits, k) << endl;
+
+    return 0;
+}
